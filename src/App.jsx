@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   useLoaderData,
   useSearchParams,
@@ -15,7 +15,7 @@ const regionLoader = async ({ request }) => {
   const selectedDistrictId = url.searchParams.get("district") || "";
 
   try {
-    const response = await fetch('/data/indonesia_regions.json');
+    const response = await fetch(import.meta.env.BASE_URL + 'data/indonesia_regions.json');
     if (!response.ok) throw new Error("Gagal load JSON");
     const allData = await response.json();
 
@@ -194,7 +194,7 @@ const AssessmentPage = () => {
 };
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <AssessmentPage />,
